@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "690540812071",
+    "project_id": "finalteste-f774e",
+    "storage_bucket": "finalteste-f774e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690540812071:android:89d048e5465f30e221bb02",
+        "android_client_info": {
+          "package_name": "com.example.teste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5G63GPkfRea5h9xPu57hBKakvZ2BvHYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
