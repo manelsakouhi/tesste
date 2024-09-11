@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 //i love you
+//i love you too babe
 import 'binding.dart';
 import 'core/services/services.dart';
 import 'localization/changelocal.dart';
