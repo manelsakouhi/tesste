@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-//
+//i love you
 import 'binding.dart';
 import 'core/services/services.dart';
 import 'localization/changelocal.dart';
