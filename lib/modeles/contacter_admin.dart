@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../Admin/utils/app_color.dart';
 
 class Contact extends StatefulWidget {
   const Contact({super.key});
@@ -14,6 +17,7 @@ final mailController=TextEditingController();
 final adrController=TextEditingController();
   final phoneController=TextEditingController();
   final pswController=TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   
    void vider()
    {
@@ -43,7 +47,7 @@ final adrController=TextEditingController();
             
             Expanded(
               flex:2,
-              child: TextField(
+              child: TextFormField(
                 decoration: const InputDecoration
                 (
                   labelText: "Nom",
@@ -57,7 +61,7 @@ final adrController=TextEditingController();
             ),
             Expanded(
               flex:2,
-              child: TextField(
+              child: TextFormField(
                 decoration:const InputDecoration
                 (
                   labelText: "Prenom",
@@ -71,7 +75,7 @@ final adrController=TextEditingController();
             ),
             Expanded(
               flex:2,
-              child: TextField(
+              child: TextFormField(
                 decoration: const InputDecoration
                 (
                   labelText: "Email",
@@ -85,12 +89,12 @@ final adrController=TextEditingController();
             ),
             Expanded(
               flex:2,
-              child: TextField(
+              child: TextFormField(
                 decoration:const InputDecoration
                 (
                   labelText: "Adresse",
                   hintText: "Entrez votre adresse",
-                  //suffixText: "@gmail.com",
+                  suffixText: "@gmail.com",
                   icon: Icon(Icons.person)
                 ), 
                 keyboardType: TextInputType.text, //
@@ -99,7 +103,7 @@ final adrController=TextEditingController();
             ),
             Expanded(
               flex:2,
-              child: TextField(
+              child: TextFormField(
                 decoration: const InputDecoration
                 (
                   labelText: "Telephone",
@@ -110,6 +114,56 @@ final adrController=TextEditingController();
                 controller: phoneController,
               ),
             ),
+                   const SizedBox(
+                height: 20,
+              ),
+               
+
+
+               
+             
+                 Expanded(
+              flex:2,
+              child: TextFormField(
+                decoration: const InputDecoration
+                (
+                  labelText: "Description",
+                  
+                  icon: Icon(Icons.description)
+                ), 
+               // keyboardType: TextInputType.number, //
+                controller: descriptionController,
+              )),
+                 TextFormField(
+                  maxLines: 5,
+                  controller:descriptionController,
+                  validator: (input) {
+                    if (input!.isEmpty) {
+                      Get.snackbar('Opps', "Description is required.",
+                          colorText: Colors.white,
+                          backgroundColor: Colors.blue);
+                      return '';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(border: InputBorder.none,
+                    contentPadding:
+                  const  EdgeInsets.only(top: 25, left: 15, right: 15),
+                    hintStyle: TextStyle(
+                      color: AppColors.genderTextColor,
+                    ),
+                    hintText:
+                    'Write a summary and any details your invitee should know about the event...',
+                    // border: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(8.0),
+                    // ),
+                  ),
+                ),
+             
+              
+
+
+
            
               Expanded(
                 flex: 1,

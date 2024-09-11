@@ -5,10 +5,13 @@ import 'package:teste/modeles/Maps.dart';
 import 'package:teste/Visiteur_pro/RDV.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
 import 'package:teste/Visiteur_Simple/agenda.dart';
-import 'package:teste/modeles/events.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
+import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/partenaires.dart';
+
+import '../Visiteur_Simple/events/accueil_events.dart';
+import '../Visiteur_Simple/events/event_view.dart';
 
 class HomePro extends StatefulWidget {
   const HomePro({super.key});
@@ -37,7 +40,7 @@ class _HomeProState extends State<HomePro> {
                 onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Events()),
+            MaterialPageRoute(builder: (context) =>  EventsView()),
   );
             },
                 child: Container(
@@ -81,7 +84,7 @@ class _HomeProState extends State<HomePro> {
                  onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const RDV()),
+            MaterialPageRoute(builder: (context) =>  RendezvousForm()),
   );
             },
                 child: Container(
@@ -103,7 +106,7 @@ class _HomeProState extends State<HomePro> {
                  onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Contrat()),
+            MaterialPageRoute(builder: (context) =>  History()),
   );
             },
                 child: Container(
@@ -114,7 +117,7 @@ class _HomeProState extends State<HomePro> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.calendar_month, size: 50, color: Colors.white,),
-                    Text('my contrats', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('History', style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,

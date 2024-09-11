@@ -33,16 +33,15 @@ Widget textField({text,TextEditingController? controller,Function? validator,Tex
   );
 }
 
-Widget myTextField({text, String? icon, bool, TextEditingController? controller,Function? validator}) {
+Widget myTextField({text, String? icon, bool obscureText = false, TextEditingController? controller, Function? validator}) {
   return Container(
     height: 45,
     child: TextFormField(
-
-      validator: (input)=> validator!(input),
-      obscureText: bool,
+      validator: (input) => validator!(input),
+      obscureText: obscureText,
       controller: controller,
       decoration: InputDecoration(
-        contentPadding:EdgeInsets.only(top: 5),
+        contentPadding: EdgeInsets.only(top: 5),
         errorStyle: TextStyle(fontSize: 0),
         hintStyle: TextStyle(
           color: AppColors.genderTextColor,
@@ -52,11 +51,12 @@ Widget myTextField({text, String? icon, bool, TextEditingController? controller,
           icon!,
           cacheHeight: 20,
         ),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0))
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
       ),
     ),
   );
 }
+
 
 Widget socialAppsIcons({text,Function? onPressed}) {
   return InkWell(
@@ -423,3 +423,4 @@ Widget completeCommunityWidget({
     ],
   );
 }
+//much sam3ak

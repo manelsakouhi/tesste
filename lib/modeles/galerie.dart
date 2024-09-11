@@ -39,7 +39,7 @@ class Photo extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: 200,
+                height: 150,
             decoration:  BoxDecoration(
               color: Colors.pink,
               image: DecorationImage(

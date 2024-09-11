@@ -1,19 +1,22 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teste/Admin/createEvents.dart';
+import 'package:get/get.dart';
 import 'package:teste/Admin/homeAdmin.dart';
 import 'package:teste/Admin/listeContrat.dart';
-import 'package:teste/Admin/listeRDV.dart';
-import 'package:teste/Admin/notification.dart';
-import 'package:teste/Admin/profil.dart';
+import 'package:teste/Admin/RDV/listeRDV.dart';
+import 'package:teste/Admin/Notification/notification.dart';
+import 'package:teste/Admin/Profile/profil.dart';
+import 'package:teste/core/constant/approutes.dart';
+import 'package:teste/core/services/services.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
 
 
 import '../Screens/login.dart';
+import 'widgets_create_events/create_event_view.dart';
+import 'RDV/users_list_view.dart';
 
 class Admin extends StatefulWidget {
   const Admin({super.key});
@@ -78,7 +81,17 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  const CreateEventView() ),
+            MaterialPageRoute(builder: (context) =>  const CreateEventViewTest() ),
+  );
+            },
+            ) ,
+            ListTile(
+              leading:const Icon(Icons.calendar_month),
+              title: const Text("Users"),
+              onTap: () {
+             Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>const  UsersListView()),
   );
             },
             ) ,
@@ -88,7 +101,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Mes_RDV()),
+            MaterialPageRoute(builder: (context) =>  RendezvousList()),
   );
             },
             ) ,
@@ -128,10 +141,12 @@ setCurrentIndex(int index)
             leading:const Icon(Icons.logout, color: Colors.red,),
               title: const Text("Log Out",style:TextStyle(color: Colors.red)),
               onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-  );
+                Get.offAllNamed(AppRoute.login);
+                MyServices myServices = Get.find();
+                myServices.sharedPreferences.clear();
+                myServices.sharedPreferences.setString("step", "1");
+             
+ 
             },
             ) ,
           ],
@@ -181,8 +196,8 @@ setCurrentIndex(int index)
                       
           //ajouter les pages 
           const HomeAdmin(),
-           const Mes_RDV(),
-           const CreateEventView(),
+            RendezvousList(),
+           const CreateEventViewTest(),
           const ProfileScreen(),
 
           ][_currentIndex],

@@ -1,22 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:teste/Visiteur_Simple/histoire.dart';
+import 'package:get/get.dart';
+import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
 import 'package:teste/Visiteur_Simple/agenda.dart';
-import 'package:teste/modeles/events.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+import 'events/accueil_events.dart';
+import 'events/event_view.dart';
 
-  @override
-  State<Home> createState() => _HomeState();
-}
+class Home extends StatelessWidget {
+  //  DocumentSnapshot eventData,user;
 
-class _HomeState extends State<Home> {
+  // Home(this.eventData,this.user);
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -35,10 +36,8 @@ class _HomeState extends State<Home> {
             children: [
               InkWell(
                 onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Events()),
-  );
+                  Get.to(EventsView());
+             
             },
                 child: Container(
                 decoration: BoxDecoration(
@@ -101,7 +100,7 @@ class _HomeState extends State<Home> {
                  onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const History()),
+            MaterialPageRoute(builder: (context) =>  History()),
   );
             },
                 child: Container(
@@ -231,5 +230,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-  
 }

@@ -1,22 +1,25 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:teste/Visiteur_Simple/histoire.dart';
+import 'package:get/get.dart';
+import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
 import 'package:teste/Visiteur_Simple/agenda.dart';
 import 'package:teste/modeles/contacter_admin.dart';
-import 'package:teste/modeles/events.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
 import 'package:teste/Visiteur_Simple/discussion/messageVisiteurSimple.dart';
-import 'package:teste/Visiteur_Simple/notification.dart';
+import 'package:teste/Visiteur_Simple/notification/notification.dart';
 import 'package:teste/Visiteur_Simple/profil/profil.dart';
 import 'package:teste/Visiteur_Simple/profil/update_profil.dart';
+import '../core/constant/approutes.dart';
+import '../core/services/services.dart';
 import 'Home.dart';
 import '../Screens/login.dart';
+import 'events/accueil_events.dart';
 
 class Visiteur extends StatefulWidget {
   const Visiteur({super.key});
@@ -78,7 +81,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Home()),
+            MaterialPageRoute(builder: (context) =>  Home()),
   );
             },
             ) ,
@@ -88,7 +91,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Events()),
+            MaterialPageRoute(builder: (context) =>   EventsView() ),
   );
             },
             ) ,
@@ -120,7 +123,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const History()),
+            MaterialPageRoute(builder: (context) =>  History()),
   );
             },
             ) ,
@@ -188,10 +191,11 @@ setCurrentIndex(int index)
             leading:const Icon(Icons.logout, color: Colors.red,),
               title: const Text("Log Out",style:TextStyle(color: Colors.red)),
               onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-  );
+             Get.offAllNamed(AppRoute.login);
+                MyServices myServices = Get.find();
+                myServices.sharedPreferences.clear();
+                myServices.sharedPreferences.setString("step", "1");
+              
             },
             ) ,
           ],
@@ -202,7 +206,7 @@ setCurrentIndex(int index)
 
 
 
-
+// دا كود انهى صفحه بالظبط** aya code 
 
       appBar: AppBar(
         //title: const Text("Visiteur: Expo Japon Osaka 2025"),
@@ -212,7 +216,7 @@ setCurrentIndex(int index)
             onPressed: () {
               Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const UpdateProfil()),
+        MaterialPageRoute(builder: (context) =>  UpdateProfil()),
   );
             },
           
@@ -240,11 +244,11 @@ setCurrentIndex(int index)
         body: [
            
           //ajouter les pages de navigator side
-          const Home(),
+           Home(),
            const ChatPage(receiverUserEmail:'email', receiverUserID: 'uid',),
           
            const Favoris(),
-          const ProfilPage(),
+           const ProfilPage(),
           ][_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setCurrentIndex(index),

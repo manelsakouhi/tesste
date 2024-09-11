@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:teste/modeles/photo.dart';
 
 class Partenaire extends StatelessWidget {
   final List _photo= [
-    Data(image: "assets/images/photo.png",text: "pavillon Tunisia"),
-    Data(image: "assets/images/artisanat.jpg",text: "Artisanat"),
-    Data(image: "assets/images/Cepex-Amesterdam.jpg",text: "pavillon Tunisia_Amesterdam"),
-    Data(image: "assets/images/dubai.jpg",text: "pavillon Tunisia_dubai"),
-    Data(image: "assets/images/expo-dubai.jpg",text: "pavillon Tunisia_dubai"),
-    Data(image: "assets/images/expo.jpg",text: "pavillon Tunisia"),
-    Data(image: "assets/images/italie.jpg",text: "pavillon Tunisia_italie"),
-    Data(image: "assets/images/pavillon.jpg",text: "pavillon Tunisia"),
-    Data(image: "assets/images/pavillon2.jpg",text: "pavillon Tunisia"),
-    Data(image: "assets/images/tunis_dubai.jpg",text: "pavillon Tunisia_dubai"),
+    Data(image: "assets/images/BCT.jpg",text: "Banque Centrale Tunisie"),
+    Data(image: "assets/images/UTICA.jpg",text: "UTICA"),
+    Data(image: "assets/images/UTAP.jpg",text: "UTAP ",),
+    Data(image: "assets/images/tunisair.jpg",text: "Tunisair"),
+    Data(image: "assets/images/CCIT.png",text: "CCIT"),
+   Data(image: "assets/images/CTN.jpg",text: " CTN"),
+    Data(image: "assets/images/GIZ.jpg",text: "GIZ"),
+    Data(image: "assets/images/GIPP.png",text: "GIPP"),
+    //Data(image: "assets/images/pavillon2.jpg",text: "pavillon Tunisia"),
+    //Data(image: "assets/images/tunis_dubai.jpg",text: "pavillon Tunisia_dubai"),
        
   ];
    Partenaire({super.key});
@@ -21,7 +22,7 @@ class Partenaire extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
         title: const Text("Partners & Sponsors"),
         centerTitle: true,
         elevation: 0,
@@ -30,22 +31,22 @@ class Partenaire extends StatelessWidget {
         itemCount: _photo.length,
         gridDelegate:const  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 5,
-          mainAxisSpacing: 5),
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4),
         itemBuilder: (context, index) {
           return Column(
             children: [
               const SizedBox(height: 10,),
               Container(
-                width: double.infinity,
-                height: 200,
+                width: 200,
+                height: 150,
             decoration:  BoxDecoration(
-              color: Colors.pink,
+              color: Colors.white,
               image: DecorationImage(
                 image: AssetImage(_photo[index].image),
-                fit:BoxFit.cover)
+                //fit:BoxFit.cover)
             ),
-          ),
+          ),),
           const SizedBox(height: 10,),
            Text(_photo[index].text),
             ],

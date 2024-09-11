@@ -6,64 +6,97 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as Path;
-class DataController extends GetxController{
 
-
+class DataController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   DocumentSnapshot? myDocument;
 
-
-
-  var allUsers  = <DocumentSnapshot>[].obs;
+  var allUsers = <DocumentSnapshot>[].obs;
   var filteredUsers = <DocumentSnapshot>[].obs;
   var allEvents = <DocumentSnapshot>[].obs;
   var filteredEvents = <DocumentSnapshot>[].obs;
   var joinedEvents = <DocumentSnapshot>[].obs;
 
   var isEventsLoading = false.obs;
+  var isUsersLoading = false.obs;
 
+  // Search query
+  var searchQuery = ''.obs;
 
-  var isMessageSending = false.obs;
-  //stocker les messages dans firestore
-  sendMessageToFirebase({
-    Map<String,dynamic>? data,
-    String? lastMessage,
-    String? grouid
-  })async{
-
-   isMessageSending(true);
-
-    await FirebaseFirestore.instance.collection('chats').doc(grouid).collection('chatroom').add(data!);
-    await FirebaseFirestore.instance.collection('chats').doc(grouid).set({
-      'lastMessage': lastMessage,
-      'groupId': grouid,
-      'group': grouid!.split('-'),
-    },SetOptions(merge: true));
-
-    isMessageSending(false);
-
+  @override
+  void onInit() {
+    super.onInit();
+    getMyDocument();
+    getUsers();
+    getEvents();
   }
 
- //stocker les notifications dans firestore
-  createNotification(String recUid){
-    FirebaseFirestore.instance.collection('notifications').doc(recUid).collection('myNotifications').add({
-      'message': "Send you a message.",
-      'image': myDocument!.get('image'),
-      'name': myDocument!.get('first')+ " "+ myDocument!.get('last'),
-      'time': DateTime.now()
-    });
-  }
-
-  getMyDocument(){
+  getMyDocument() {
     FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid)
         .snapshots().listen((event) {
           myDocument = event;
     });
   }
-  
- Future<String> uploadImageToFirebase(File file)async{
+
+  getUsers() {
+    isUsersLoading(true);
+    FirebaseFirestore.instance.collection('users').snapshots().listen((event) {
+      allUsers.value = event.docs;
+      filteredUsers.value.assignAll(allUsers);
+      isUsersLoading(false);
+    });
+  }
+
+  getEvents() {
+    isEventsLoading(true);
+    FirebaseFirestore.instance.collection('events').snapshots().listen((event) {
+      allEvents.assignAll(event.docs);
+      filteredEvents.assignAll(event.docs);
+
+      joinedEvents.value = allEvents.where((e) {
+        List joinedIds = e.get('joined');
+        return joinedIds.contains(FirebaseAuth.instance.currentUser!.uid);
+      }).toList();
+
+      isEventsLoading(false);
+    });
+  }
+
+  // Update search query and filter events
+  void updateSearchQuery(String query) {
+    searchQuery.value = query;
+    filterEvents();
+  }
+
+  // Filter events based on the search query
+   void filterEvents() {
+    String query = searchQuery.value.toLowerCase();
+    filteredEvents.value = allEvents.where((event) {
+      String eventName = event.get('event_name').toLowerCase();
+      bool matchesName = eventName.contains(query);
+
+      // Parse the date
+      DateTime now = DateTime.now();
+      String dateStr = event.get('date');
+      DateTime eventDate;
+
+      try {
+        eventDate = DateFormat('dd-MM-yyyy').parse(dateStr);
+      } catch (e) {
+        // Handle parsing error (e.g., log it or default to a specific date)
+        eventDate = DateTime.now().subtract(Duration(days: 1)); // Example fallback
+      }
+
+      bool isUpcoming = eventDate.isAfter(now);
+
+      return matchesName && isUpcoming;
+    }).toList();
+  }
+
+  Future<String> uploadImageToFirebase(File file) async {
     String fileUrl = '';
     String fileName = Path.basename(file.path);
     var reference = FirebaseStorage.instance.ref().child('myfiles/$fileName');
@@ -76,87 +109,57 @@ class DataController extends GetxController{
     return fileUrl;
   }
 
- Future<String> uploadThumbnailToFirebase(Uint8List file)async{
-   String fileUrl = '';
-   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-   var reference = FirebaseStorage.instance.ref().child('myfiles/$fileName.jpg');
-   UploadTask uploadTask = reference.putData(file);
-   TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
-   await taskSnapshot.ref.getDownloadURL().then((value) {
-     fileUrl = value;
-   });
-
-
-   print("Thumbnail $fileUrl");
-
-   return fileUrl;
- }
-
- Future<bool> createEvent(Map<String,dynamic> eventData)async{
-   bool isCompleted = false;
-
-   await FirebaseFirestore.instance.collection('events')
-   .add(eventData)
-   .then((value) {
-     isCompleted = true;
-     Get.snackbar('Event Uploaded', 'Event is uploaded successfully.',
-         colorText: Colors.white,backgroundColor: Colors.blue);
-   }).catchError((e){
-     isCompleted = false;
-   });
-
-
-   return isCompleted;
- }
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getMyDocument();
-    getUsers();
-    getEvents();
+  Future<String> uploadThumbnailToFirebase(Uint8List file) async {
+    String fileUrl = '';
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    var reference = FirebaseStorage.instance.ref().child('myfiles/$fileName.jpg');
+    UploadTask uploadTask = reference.putData(file);
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+    await taskSnapshot.ref.getDownloadURL().then((value) {
+      fileUrl = value;
+    });
+    print("Thumbnail $fileUrl");
+    return fileUrl;
   }
 
-
-  var isUsersLoading = false.obs;
-
-  getUsers(){
-    isUsersLoading(true);
-    FirebaseFirestore.instance.collection('users').snapshots().listen((event) {
-      allUsers.value = event.docs;
-      filteredUsers.value.assignAll(allUsers);
-      isUsersLoading(false);
-     });
+  Future<bool> createEvent(Map<String, dynamic> eventData) async {
+    bool isCompleted = false;
+    await FirebaseFirestore.instance.collection('events')
+        .add(eventData)
+        .then((value) {
+      isCompleted = true;
+      Get.snackbar('Event Uploaded', 'Event is uploaded successfully.',
+          colorText: Colors.white, backgroundColor: Colors.blue);
+    }).catchError((e) {
+      isCompleted = false;
+    });
+    return isCompleted;
   }
 
-
-  getEvents(){
-    isEventsLoading(true);
-
-    FirebaseFirestore.instance.collection('events').snapshots().listen((event) {
-      allEvents.assignAll(event.docs);
-      filteredEvents.assignAll(event.docs);
-
-
-    joinedEvents.value =   allEvents.where((e){
-        List joinedIds = e.get('joined');
-
-        return joinedIds.contains(FirebaseAuth.instance.currentUser!.uid);
-
-      }).toList();
-
-
-
-
-
-      isEventsLoading(false);
-     });
-
-
+  // Send message to Firebase (existing method)
+  var isMessageSending = false.obs;
+  sendMessageToFirebase({
+    Map<String, dynamic>? data,
+    String? lastMessage,
+    String? groupId
+  }) async {
+    isMessageSending(true);
+    await FirebaseFirestore.instance.collection('chats').doc(groupId).collection('chatroom').add(data!);
+    await FirebaseFirestore.instance.collection('chats').doc(groupId).set({
+      'lastMessage': lastMessage,
+      'groupId': groupId,
+      'group': groupId!.split('-'),
+    }, SetOptions(merge: true));
+    isMessageSending(false);
   }
 
-
-
-
+  // Create notification (existing method)
+  createNotification(String recUid) {
+    FirebaseFirestore.instance.collection('notifications').doc(recUid).collection('myNotifications').add({
+      'message': "Send you a message.",
+      'image': myDocument!.get('image'),
+      'name': myDocument!.get('firstName') + " " + myDocument!.get('lastName'),
+      'time': DateTime.now()
+    });
+  }
 }

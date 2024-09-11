@@ -1,23 +1,27 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:teste/Visiteur_pro/Contrats.dart';
 import 'package:teste/Visiteur_pro/agendaPro.dart';
 import 'package:teste/Visiteur_pro/homePro.dart';
 import 'package:teste/Visiteur_pro/messagePro.dart';
 import 'package:teste/Visiteur_pro/notification.dart';
-import 'package:teste/Visiteur_pro/profilpro.dart';
+import 'package:teste/Visiteur_pro/profil/profilpro.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
 import 'package:teste/Visiteur_pro/RDV.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
 import 'package:teste/modeles/contacter_admin.dart';
-import 'package:teste/modeles/events.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
 
 import '../Screens/login.dart';
+import '../Visiteur_Simple/events/accueil_events.dart';
+import '../Visiteur_Simple/events/event_view.dart';
+import '../core/constant/approutes.dart';
+import '../core/services/services.dart';
 
 class VisiteurPro extends StatefulWidget {
   const VisiteurPro({super.key});
@@ -61,7 +65,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ProfilPagePro()),
+            MaterialPageRoute(builder: (context) => const ProfilPagepro()),
   );
             },
             ) ,
@@ -91,7 +95,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Events()),
+            MaterialPageRoute(builder: (context) => EventsView()),
   );
             },
             ) ,
@@ -101,7 +105,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const RDV()),
+            MaterialPageRoute(builder: (context) => RendezvousForm()),
   );
             },
             ) ,
@@ -200,10 +204,10 @@ setCurrentIndex(int index)
             leading:const Icon(Icons.logout, color: Colors.red,),
               title: const Text("Log Out",style:TextStyle(color: Colors.red)),
               onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginPage()),
-  );
+                 Get.offAllNamed(AppRoute.login);
+                MyServices myServices = Get.find();
+                myServices.sharedPreferences.clear();
+                myServices.sharedPreferences.setString("step", "1");
             },
             ) ,
           ],
@@ -224,7 +228,7 @@ setCurrentIndex(int index)
             onPressed: () {
               Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const ProfilPagePro()),
+        MaterialPageRoute(builder: (context) => const ProfilPagepro()),
   );
             },
           
@@ -254,9 +258,9 @@ setCurrentIndex(int index)
           //ajouter les pages de navigator side
           const HomePro(),
            const MessagePro(),
-           const RDV(),
+            RendezvousForm(),
            const Favoris(),
-          const ProfilPagePro(),
+          const ProfilPagepro(),
           ][_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setCurrentIndex(index),

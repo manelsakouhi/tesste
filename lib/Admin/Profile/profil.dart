@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teste/Admin/controller/data_controller.dart';
 import 'package:teste/Admin/utils/app_color.dart';
-import 'package:teste/Admin/widgets/my_widgets.dart';
+import 'package:teste/Admin/widgets_create_events/my_widgets.dart';
 import 'package:teste/modeles/ticket_model.dart';
 
 
@@ -74,8 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     dataController = Get.find<DataController>();
 
-    firstNameController.text = dataController!.myDocument!.get('first');
-    lastNameController.text = dataController!.myDocument!.get('last');
+    firstNameController.text = dataController!.myDocument!.get('firstName');
+    lastNameController.text = dataController!.myDocument!.get('lastName');
 
     try{
       descriptionController.text = dataController!.myDocument!.get('desc');
@@ -114,6 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+Get.put(DataController());
     var screenheight = MediaQuery.of(context).size.height;
     var screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(

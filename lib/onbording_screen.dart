@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teste/Screens/login.dart';
+import 'package:teste/core/services/services.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -11,10 +12,10 @@ class OnBoardingScreen extends StatelessWidget {
     return SafeArea(child: Scaffold(
       body: Container(
         width: double.infinity,
-        child: Column(
+        child: ListView(
 
-          mainAxisAlignment: MainAxisAlignment.start,
-           crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          //  crossAxisAlignment: CrossAxisAlignment.center,
 
           children: [
 
@@ -22,17 +23,19 @@ class OnBoardingScreen extends StatelessWidget {
               height: 50,
             ),
 
-          const  Text("Welcome to Japon Expo!",style: TextStyle(
-              color: Colors.black,
-              fontSize: 27,
-              fontWeight: FontWeight.w700,
-            ),),
+          Center(
+            child:   Text("Welcome to Japon Expo!",style: TextStyle(
+                color: Colors.black,
+                fontSize: 27,
+                fontWeight: FontWeight.w700,
+              ),),
+          ),
 
           const  SizedBox(
               height: 5,
             ),
 
-           const Text("Event Management System",style: TextStyle(fontSize: 16),),
+           Center(child: const Text("Event Management System",style: TextStyle(fontSize: 16),)),
 
            const SizedBox(
               height: 50,
@@ -40,13 +43,10 @@ class OnBoardingScreen extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.only(left: 15,right: 15),
-              child: Image.asset('assets/images/logo2.jpg'),
+              child: Image.asset('assets/images/logo2.jpg' ,height: Get.height *0.50,),
             ),
 
-          const  SizedBox(
-              height: 50,
-            ),
-
+         const Spacer(),
 
             Expanded(
               child: Container(
@@ -106,6 +106,8 @@ class OnBoardingScreen extends StatelessWidget {
                         color: Colors.white,
                         elevation: 2,
                         onPressed: (){
+                          MyServices myServices = Get.find();
+                          myServices.sharedPreferences.setString("step", "1");
                           Get.to(()=>const LoginPage());
                           },
 
