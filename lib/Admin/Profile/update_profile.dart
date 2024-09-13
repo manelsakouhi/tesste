@@ -5,21 +5,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:teste/Admin/utils/app_color.dart';
 
-import '../../core/constant/approutes.dart';
-import '../../core/services/services.dart';
+import 'package:teste/core/constant/approutes.dart';
+import 'package:teste/core/services/services.dart';
 
-class UpdateProfil extends StatefulWidget {
-  const UpdateProfil({super.key});
+import '../../Admin/utils/app_color.dart';
+
+class UpdateProfileAdmin extends StatefulWidget {
+  const UpdateProfileAdmin({super.key});
 
   @override
-  _UpdateProfilState createState() => _UpdateProfilState();
+  State<UpdateProfileAdmin> createState() => _UpdateProfileAdminState();
 }
 
-class _UpdateProfilState extends State<UpdateProfil> {
+class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
   final currentUser = FirebaseAuth.instance.currentUser!;
   File? _imageFile;
   final picker = ImagePicker();
@@ -162,7 +162,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
 
       // Refresh page
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const UpdateProfil()),
+        MaterialPageRoute(builder: (context) => const UpdateProfileAdmin()),
       );
     } catch (e) {
       setState(() {
@@ -175,42 +175,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
     }
   }
 
-  Future<void> _deleteProfile() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      // Update user data to mark as deleted
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(currentUser.uid)
-          .update({
-        'states': 'deleted', // Set a 'status' field to 'deleted'
-        'message': 'Profile marked as deleted by you'
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile marked as deleted by you')),
-      );
-
-      // Sign out the user
-      await FirebaseAuth.instance.signOut();
-      Get.offAllNamed(AppRoute.login);
-      MyServices myServices = Get.find();
-      myServices.sharedPreferences.clear();
-      myServices.sharedPreferences.setString("step", "1");
-    } catch (e) {
-      setState(() {
-        _errorMessage = 'Failed to delete profile: $e';
-      });
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -342,21 +307,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _deleteProfile,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.red, // Color for the delete button
-                        side: BorderSide.none,
-                        shape: const StadiumBorder(),
-                      ),
-                      child: const Text("Delete Profile",
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
+                 
                   const SizedBox(height: 30),
                 ],
               ),

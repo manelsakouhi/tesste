@@ -39,6 +39,21 @@ ThemeData themeJaponais = ThemeData(
   // primarySwatch: AppColor.primaryColor,
   // fontFamily: "Almarai",
   scaffoldBackgroundColor: Colors.white,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.white,
+    titleTextStyle: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+        // fontFamily: "Alkatra",
+        color: AppColors.primaryColor),
+    centerTitle: true,
+    iconTheme: IconThemeData(color: AppColors.primaryColor),
+    elevation: 0,
+  ),
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+
+  floatingActionButtonTheme:
+      FloatingActionButtonThemeData(backgroundColor: AppColors.primaryColor),
   // textTheme: const TextTheme(
   //   displayLarge: TextStyle(
   //       fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.black),

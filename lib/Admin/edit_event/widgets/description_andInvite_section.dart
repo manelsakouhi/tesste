@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/create_event_controller.dart';
-import '../utils/app_color.dart';
-import 'my_widgets.dart';
+import '../../controller/edit_event_controller_test.dart';
+import '../../utils/app_color.dart';
+import '../../widgets_create_events/my_widgets.dart';
 
-class DescriptionAndInviteSection extends GetView<CreateEventControllerImp> {
-  const DescriptionAndInviteSection({
+
+
+class EditDescriptionAndInviteSection extends GetView<EditEventControllerImp> {
+  const EditDescriptionAndInviteSection({
     super.key,
     required this.size,
   });

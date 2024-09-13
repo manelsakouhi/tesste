@@ -65,6 +65,22 @@ class DataController extends GetxController {
     });
   }
 
+  // Fetch event data by eventId
+  Future<Map<String, dynamic>> getEventData(String eventId) async {
+    try {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance.collection('events').doc(eventId).get();
+
+      if (snapshot.exists) {
+        return snapshot.data() as Map<String, dynamic>;
+      } else {
+        throw Exception('Event not found');
+      }
+    } catch (e) {
+      print("Error fetching event data: $e");
+      throw e; // Propagate the error to handle it elsewhere
+    }
+  }
+
   // Update search query and filter events
   void updateSearchQuery(String query) {
     searchQuery.value = query;
@@ -161,5 +177,19 @@ class DataController extends GetxController {
       'name': myDocument!.get('firstName') + " " + myDocument!.get('lastName'),
       'time': DateTime.now()
     });
+  }
+
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> updateEvent(String eventId, Map<String, dynamic> eventData) async {
+    try {
+      final eventRef = _firestore.collection('events').doc(eventId);
+
+      await eventRef.update(eventData);
+
+      print("Event updated successfully");
+    } catch (e) {
+      print("Error updating event: $e");
+      throw e; // Rethrow to handle in the UI
+    }
   }
 }

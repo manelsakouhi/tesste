@@ -2,12 +2,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/create_event_controller.dart';
-import '../utils/app_color.dart';
-import 'my_widgets.dart';
+import '../../controller/edit_event_controller_test.dart';
+import '../../utils/app_color.dart';
+import '../../widgets_create_events/my_widgets.dart';
 
-class CustomChooseImage extends GetView<CreateEventControllerImp> {
-  const CustomChooseImage({
+
+
+class EditCustomChooseImage extends GetView<EditEventControllerImp> {
+  const EditCustomChooseImage({
     super.key,
     required this.size,
   });

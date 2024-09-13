@@ -7,7 +7,7 @@ import 'package:teste/Admin/homeAdmin.dart';
 import 'package:teste/Admin/listeContrat.dart';
 import 'package:teste/Admin/RDV/listeRDV.dart';
 import 'package:teste/Admin/Notification/notification.dart';
-import 'package:teste/Admin/Profile/profil.dart';
+import 'package:teste/Admin/Profile/profil_admin.dart';
 import 'package:teste/core/constant/approutes.dart';
 import 'package:teste/core/services/services.dart';
 import 'package:teste/modeles/galerie.dart';
@@ -15,8 +15,8 @@ import 'package:teste/modeles/partenaires.dart';
 
 
 import '../Screens/login.dart';
-import 'widgets_create_events/create_event_view.dart';
 import 'RDV/users_list_view.dart';
+import 'widgets_create_events/events_list_view.dart';
 
 class Admin extends StatefulWidget {
   const Admin({super.key});
@@ -81,7 +81,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>  const CreateEventViewTest() ),
+            MaterialPageRoute(builder: (context) =>  const EventsListView() ),
   );
             },
             ) ,
@@ -197,7 +197,7 @@ setCurrentIndex(int index)
           //ajouter les pages 
           const HomeAdmin(),
             RendezvousList(),
-           const CreateEventViewTest(),
+           const EventsListView(),
           const ProfileScreen(),
 
           ][_currentIndex],

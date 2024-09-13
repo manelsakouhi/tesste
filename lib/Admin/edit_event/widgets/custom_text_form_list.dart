@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teste/Admin/widgets_create_events/description_andInvite_section.dart';
 
-import '../controller/create_event_controller.dart';
-import 'my_widgets.dart';
+import '../../controller/edit_event_controller_test.dart';
+import '../../widgets_create_events/my_widgets.dart';
+import 'description_andInvite_section.dart';
+import 'edit_description.dart';
 
-class CustomTextFormList extends GetView<CreateEventControllerImp> {
-  const CustomTextFormList({super.key});
+
+
+class EditCustomTextFormList extends GetView<EditEventControllerImp> {
+  const EditCustomTextFormList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +158,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
               const  SizedBox(
                   height: 20,
                 ),
-      DescriptionAndInviteSection(size: size),
-       SizedBox(
-                  height: size.height * 0.03
-                ),
+      
       ],
     );
   }

@@ -31,7 +31,11 @@ class MyTranslation extends Translations {
           "24":"please enter valid password min. 6 character",
           "25":"Enter Your Email and we will send you a password reset link",
           "26":"Reset Password",
-//hh ana ra7 ejnalt mab9dr a3ml reaction fy nas janbii
+          "27" : "Settings",
+          "28":"Select Language:",
+          '29':"English",
+          "30":"Japanese",
+          "31":"Delete Account",
         },
         "jp": {
           
@@ -61,6 +65,11 @@ class MyTranslation extends Translations {
           "24":"有効なパスワードを入力してください。 6文字",
           "25":"メールアドレスを入力すると、パスワードのリセットリンクが送信されます",
           "26":"パスワードのリセット",
+          "27" : "設定",
+          "28":"言語を選択してください:",
+          '29':"英語",
+          "30":"日本語",
+          "31":"アカウントの削除",
 
         }
       };

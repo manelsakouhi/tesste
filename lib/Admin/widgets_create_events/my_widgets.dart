@@ -100,14 +100,18 @@ Widget settingIconAndText(
   );
 }
 
-Widget elevatedButton({text, Function? onpress}) {
+
+
+Widget elevatedButton({
+  required String text,
+  required Future<void> Function() onpress,
+}) {
   return ElevatedButton(
     style: ButtonStyle(
-
       backgroundColor: MaterialStateProperty.all<Color>(AppColors.blue),
     ),
-    onPressed: () {
-      onpress!();
+    onPressed: () async {
+      await onpress(); // Await the function passed as onpress
     },
     child: Text(
       text,
@@ -118,6 +122,8 @@ Widget elevatedButton({text, Function? onpress}) {
     ),
   );
 }
+
+
 
 Widget labelTextField({label, hintText}) {
   return Container(

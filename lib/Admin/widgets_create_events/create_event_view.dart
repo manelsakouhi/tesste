@@ -10,9 +10,9 @@ import 'custom_icon_with_title.dart';
 import 'custom_selected_images.dart';
 import 'custom_text_form_list.dart';
 
-class CreateEventViewTest extends StatelessWidget {
-  const CreateEventViewTest({super.key});
-// this is new 
+class CreateEventView extends StatelessWidget {
+  const CreateEventView({super.key});
+
   @override
   Widget build(BuildContext context) {
     Get.put(DataController());
@@ -26,7 +26,7 @@ class CreateEventViewTest extends StatelessWidget {
             key: controller.formKey,
             child: ListView(
               children: [
-                const CustomIconWithTitle(),
+                const CustomIconWithTitle(title: "Create an Event"),
                 SizedBox(
                   height: size.height * 0.02,
                 ),

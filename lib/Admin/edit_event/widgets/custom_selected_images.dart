@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/create_event_controller.dart';
+import '../../controller/edit_event_controller_test.dart';
 
-class CustomSelectedImeges extends GetView<CreateEventControllerImp> {
-  const CustomSelectedImeges({
+class EditCustomSelectedImeges extends GetView<EditEventControllerImp> {
+  const EditCustomSelectedImeges({
     super.key,
     required this.size,
   });

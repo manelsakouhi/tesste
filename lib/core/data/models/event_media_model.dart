@@ -14,16 +14,14 @@ class EventMediaModel {
     required this.isVideo,
   });
 
-  // Method to convert EventMediaModel to Map
   Map<String, dynamic> toMap() {
     return {
       'isVideo': isVideo,
       'url': isVideo ? video?.path : image?.path,
-      'thumbnail': thumbnail,
+      'thumbnail': isVideo && thumbnail != null ? thumbnail : null,
     };
   }
 
-  // Factory method to create an EventMediaModel from a Map
   factory EventMediaModel.fromMap(Map<String, dynamic> map) {
     return EventMediaModel(
       isVideo: map['isVideo'] ?? false,

@@ -2,25 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teste/Admin/utils/app_color.dart';
-import 'package:teste/core/shared/ProfilClass.dart';
+
 
 import '../../Admin/controller/data_controller.dart';
+import '../../Admin/utils/app_color.dart';
+import '../../core/shared/ProfilClass.dart';
 import '../../core/constant/approutes.dart';
 import '../../core/services/services.dart';
 
-class ProfilPage extends StatefulWidget {
-  const ProfilPage({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
-  State<ProfilPage> createState() => _ProfilPageState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-
-
-
-class _ProfilPageState extends State<ProfilPage> {
-  final currentUser = FirebaseAuth.instance.currentUser!;
+class _ProfileScreenState extends State<ProfileScreen> {
+ final currentUser = FirebaseAuth.instance.currentUser!;
   bool isNotEditable = true;
 
   @override
@@ -101,7 +99,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       right: 0,
                       child: GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoute.updateProfil);
+                          Get.toNamed(AppRoute.updateProfilPro);
                         },
                         child: const CircleAvatar(
                           radius: 20,
@@ -134,7 +132,7 @@ class _ProfilPageState extends State<ProfilPage> {
                     children: [
                       ProfileWidget(
                         onTap: () {
-                          Get.toNamed(AppRoute.updateProfil);
+                          Get.toNamed(AppRoute.updateProfilAdmin);
                         },
                         icon: Icons.person,
                         title: 'My Profile',

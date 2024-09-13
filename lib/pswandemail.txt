@@ -1,0 +1,5 @@
+
+// email and password for all acc
+//admin: manelkhalid@gmail.com psw: test123 da ya test123 ya manel123 much fakra ok
+//visitor: manelsk@gmail.com psw: manel123
+//visitor prof: manelsakouhi@gmail.com psw: manel1919

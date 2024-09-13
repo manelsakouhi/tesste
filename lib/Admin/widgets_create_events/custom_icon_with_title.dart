@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 
 class CustomIconWithTitle extends StatelessWidget {
   const CustomIconWithTitle({
-    super.key,
+    super.key, required this.title,
   });
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return  Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
       //Icon(Icons.event),
-      SizedBox(width: 5),
-      Text("Create an Event" , style: TextStyle(
+      const SizedBox(width: 5),
+      Text(title , style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w600,
             ),),
