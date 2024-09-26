@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:teste/Visiteur_pro/Contrats.dart';
+import 'package:get/get.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
-import 'package:teste/Visiteur_pro/RDV.dart';
+import 'package:teste/Visiteur_pro/RDV/RDV.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
-import 'package:teste/Visiteur_Simple/agenda.dart';
+
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/partenaires.dart';
 
+import '../Visiteur_Simple/agenda.dart';
 import '../Visiteur_Simple/events/accueil_events.dart';
-import '../Visiteur_Simple/events/event_view.dart';
 
 class HomePro extends StatefulWidget {
   const HomePro({super.key});
@@ -50,11 +50,11 @@ class _HomeProState extends State<HomePro> {
                   color: Colors.purple,
                   
                 ),
-                child:const Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.event, size: 50, color: Colors.white,),
-                    Text('Events', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('35'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,),
@@ -70,11 +70,11 @@ class _HomeProState extends State<HomePro> {
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.red,),
-                  child:const Column(
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.favorite, size: 50, color: Colors.white,),
-                    Text('favoris', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('36'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -91,11 +91,11 @@ class _HomeProState extends State<HomePro> {
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.yellow,),
-                  child:const Column(
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.calendar_month, size: 50, color: Colors.white,),
-                    Text('My appointments', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('136'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -112,12 +112,12 @@ class _HomeProState extends State<HomePro> {
                 child: Container(
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.yellow,),
-                  child:const Column(
+                  color:  Colors.amber),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.calendar_month, size: 50, color: Colors.white,),
-                    Text('History', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Icon(Icons.history_edu_outlined, size: 50, color: Colors.white,),
+                    Text('38'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -130,22 +130,45 @@ class _HomeProState extends State<HomePro> {
                  onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const VisitTunis()),
+            MaterialPageRoute(builder: (context) =>  VisitTunis()),
   );
             },
                 child: Container(
                           decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.green,),
-                  child:const Column(
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.flag, size: 50, color: Colors.white,),
-                    Text('Visit Tunisia', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('45'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,),
-              ),         
+              ),   
+
+               InkWell(
+                 onTap: () {
+             Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  AgendaPage()),
+  );
+            },
+                child: Container(
+                   decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.orange,),
+                  child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.calendar_month, size: 50, color: Colors.white,),
+                    Text('37'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
+                  ],
+                )
+                ,
+                  ),
+              ),
+
               InkWell(
                  onTap: () {
              Navigator.push(
@@ -156,12 +179,12 @@ class _HomeProState extends State<HomePro> {
                 child: Container(
                    decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,),
-                  child:const Column(
+                  color: Color.fromARGB(255, 38, 0, 255),),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.event_seat, size: 50, color: Colors.white,),
-                    Text('About Expo', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('39'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -177,12 +200,12 @@ class _HomeProState extends State<HomePro> {
                 child: Container(
                     decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.purple,),
-                  child:const Column(
+                  color: Colors.yellowAccent,),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.location_pin, size: 50, color: Colors.white,),
-                    Text('Maps', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('42'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -198,12 +221,12 @@ class _HomeProState extends State<HomePro> {
                 child: Container(
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.red,),
-                  child:const Column(
+                  color: Colors.deepOrangeAccent,),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.person, size: 50, color: Colors.white,),
-                    Text('Partners', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('40'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
@@ -219,38 +242,18 @@ class _HomeProState extends State<HomePro> {
                 child: Container(
                   decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.yellow,),
-                  child:const Column(
+                  color: const Color.fromARGB(255, 59, 245, 255),),
+                  child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.photo_album, size: 50, color: Colors.white,),
-                    Text('Gallery', style: TextStyle(color: Colors.white, fontSize: 30),),
+                    Text('41'.tr, style: TextStyle(color: Colors.white, fontSize: 30),),
                   ],
                 )
                 ,
                   ),
               ),
-              InkWell(
-                 onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Agenda()),
-  );
-            },
-                child: Container(
-                   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.green,),
-                  child:const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.calendar_month, size: 50, color: Colors.white,),
-                    Text('Agenda', style: TextStyle(color: Colors.white, fontSize: 30),),
-                  ],
-                )
-                ,
-                  ),
-              ),
+              
             ], 
           ),
         ),

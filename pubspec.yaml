@@ -29,12 +29,17 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.3.1
+  
+  uuid: ^3.0.5
+  emoji_picker_flutter: ^1.6.4
+  table_calendar: ^3.0.0
   cloud_firestore: ^4.8.2
   cupertino_icons: ^1.0.2
   dotted_border: ^2.1.0
   firebase_auth: ^4.6.3
   firebase_core: ^2.24.2
   firebase_messaging: null
+ 
   firebase_storage: ^11.2.4
   flutter:
     sdk: flutter
@@ -43,6 +48,7 @@ dependencies:
   flutter_svg: ^2.0.10
   geolocator: 
   get: ^4.6.6
+  flutter_local_notifications: 
   google_maps_flutter: null
   image_picker: null
   intl: ^0.19.0

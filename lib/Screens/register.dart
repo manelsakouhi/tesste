@@ -106,7 +106,7 @@ class _RegisterState extends State<Register> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "19:".tr,
+                          '19'.tr,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teste/Admin/homeAdmin.dart';
-import 'package:teste/Admin/listeContrat.dart';
 import 'package:teste/Admin/RDV/listeRDV.dart';
 import 'package:teste/Admin/Notification/notification.dart';
 import 'package:teste/Admin/Profile/profil_admin.dart';
@@ -15,7 +14,11 @@ import 'package:teste/modeles/partenaires.dart';
 
 
 import '../Screens/login.dart';
+
+import 'Contart/ContratList.dart';
+import 'Contart/ContratDetails.dart';
 import 'RDV/users_list_view.dart';
+import 'chat/AllUsersPage.dart';
 import 'widgets_create_events/events_list_view.dart';
 
 class Admin extends StatefulWidget {
@@ -85,6 +88,9 @@ setCurrentIndex(int index)
   );
             },
             ) ,
+
+     
+
             ListTile(
               leading:const Icon(Icons.calendar_month),
               title: const Text("Users"),
@@ -111,7 +117,7 @@ setCurrentIndex(int index)
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Contrats()),
+            MaterialPageRoute(builder: (context) =>   ContratList()),
   );
             },
             ) ,
@@ -197,6 +203,7 @@ setCurrentIndex(int index)
           //ajouter les pages 
           const HomeAdmin(),
             RendezvousList(),
+            AllUsersPage(),
            const EventsListView(),
           const ProfileScreen(),
 
@@ -212,6 +219,7 @@ setCurrentIndex(int index)
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label:"RDV"),
+           BottomNavigationBarItem(icon: Icon(Icons.message), label:"chat"),
           BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label:"Events"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label:"Profil"),
         ]),
@@ -226,7 +234,7 @@ setCurrentIndex(int index)
      Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => LoginPage(),
+        builder: (context) => const LoginPage(),
       ),
     );
   }

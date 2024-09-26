@@ -30,8 +30,8 @@ class _ProfilPageState extends State<ProfilPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile Page", textAlign: TextAlign.center),
-        actions: [
+        title:  Text("46".tr, textAlign: TextAlign.center),
+        /* actions: [
           IconButton(
             onPressed: () async{
                await FirebaseAuth.instance.signOut();
@@ -42,7 +42,7 @@ class _ProfilPageState extends State<ProfilPage> {
             },
             icon: const Icon(Icons.logout),
           )
-        ],
+        ], */
       ), 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -137,19 +137,19 @@ class _ProfilPageState extends State<ProfilPage> {
                           Get.toNamed(AppRoute.updateProfil);
                         },
                         icon: Icons.person,
-                        title: 'My Profile',
+                        title: '47'.tr,
                       ),
                       ProfileWidget(
                         onTap: () {
                           Get.toNamed(AppRoute.settingsView);
                         },
                         icon: Icons.settings,
-                        title: 'Settings',
+                        title: '48'.tr,
                       ),
                       ProfileWidget(
                         onTap: () {},
                         icon: Icons.notifications,
-                        title: 'Notifications',
+                        title: '49'.tr,
                       ),
                       ProfileWidget(
                         onTap: () async{
@@ -160,7 +160,7 @@ class _ProfilPageState extends State<ProfilPage> {
                           myServices.sharedPreferences.setString("step", "1");
                         },
                         icon: Icons.logout,
-                        title: 'Log Out',
+                        title: '44'.tr,
                       ),
                     ],
                   ),

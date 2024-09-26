@@ -57,45 +57,10 @@ List<AustinYogaWork> austin = [
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 50,
-              height: 50,
-              padding: EdgeInsets.all(10),
-              child: Icon(
-               Icons.done_all_outlined,
-                // fit: BoxFit.cover,
-                color: AppColors.blue,
-              ),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              'You\'re all caught up!',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: Get.height * 0.015,
-        ),
+       
+        
         Container(
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: Offset(0, 1), // changes position of shadow
-            ),
-          ], color: Colors.white, borderRadius: BorderRadius.circular(8)),
-          padding: EdgeInsets.all(10),
-          width: double.infinity,
+           
           child: Column(
             children: [
               // Row(

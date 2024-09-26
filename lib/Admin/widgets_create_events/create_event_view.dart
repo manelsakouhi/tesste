@@ -19,6 +19,7 @@ class CreateEventView extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     Get.put(CreateEventControllerImp());
     return Scaffold(
+      appBar: AppBar(),
       body: GetBuilder<CreateEventControllerImp>(
         builder: (controller) => Container(
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),

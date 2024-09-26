@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:teste/Admin/utils/app_color.dart';
 
@@ -30,7 +29,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  //final TextEditingController _emailController = TextEditingController();
 
   @override
   void initState() {
@@ -55,7 +54,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
         _firstNameController.text = userData['firstName'] ?? '';
         _lastNameController.text = userData['lastName'] ?? '';
         _locationController.text = userData['location'] ?? '';
-        _emailController.text = userData['email'] ?? '';
+       // _emailController.text = userData['email'] ?? '';
         _imageUrl = userData['image'] ?? ''; // Set the image URL
 
         if (_imageUrl.isNotEmpty) {
@@ -95,21 +94,21 @@ class _UpdateProfilState extends State<UpdateProfil> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Select Image Source'),
+          title:  Text('51'.tr),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _pickImage(ImageSource.camera);
               },
-              child: const Text('Camera'),
+              child:  Text('50'.tr),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _pickImage(ImageSource.gallery);
               },
-              child: const Text('Gallery'),
+              child:  Text('41'.tr),
             ),
           ],
         );
@@ -126,7 +125,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
     String location = _locationController.text;
-    String email = _emailController.text;
+   // String email = _emailController.text;
 
     String? imageUrl;
 
@@ -152,7 +151,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
         'firstName': firstName,
         'lastName': lastName,
         'location': location,
-        'email': email,
+       // 'email': email,
         if (imageUrl != null) 'image': imageUrl,
       }, SetOptions(merge: true));
 
@@ -218,7 +217,7 @@ class _UpdateProfilState extends State<UpdateProfil> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Profile", textAlign: TextAlign.center),
+        title:  Text("52".tr, textAlign: TextAlign.center),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -287,8 +286,8 @@ class _UpdateProfilState extends State<UpdateProfil> {
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _firstNameController,
-                    decoration: const InputDecoration(
-                      label: Text("First Name"),
+                    decoration:  InputDecoration(
+                      label: Text("16".tr),
                       prefixIcon: Icon(Icons.person_outline_rounded),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
@@ -298,8 +297,8 @@ class _UpdateProfilState extends State<UpdateProfil> {
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _lastNameController,
-                    decoration: const InputDecoration(
-                      label: Text("Last Name"),
+                    decoration:  InputDecoration(
+                      label: Text("17".tr),
                       prefixIcon: Icon(Icons.person_outline_rounded),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
@@ -309,8 +308,8 @@ class _UpdateProfilState extends State<UpdateProfil> {
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: _locationController,
-                    decoration: const InputDecoration(
-                      label: Text("Location"),
+                    decoration:  InputDecoration(
+                      label: Text("53".tr),
                       prefixIcon: Icon(Icons.location_on),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
@@ -318,17 +317,17 @@ class _UpdateProfilState extends State<UpdateProfil> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
+                 /*  TextFormField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      label: Text("Email"),
+                    decoration:  InputDecoration(
+                      label: Text("7".tr),
                       prefixIcon: Icon(Icons.mail),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 20), */
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -338,25 +337,12 @@ class _UpdateProfilState extends State<UpdateProfil> {
                         side: BorderSide.none,
                         shape: const StadiumBorder(),
                       ),
-                      child: const Text("Save Profile",
+                      child:  Text("54".tr,
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _deleteProfile,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Colors.red, // Color for the delete button
-                        side: BorderSide.none,
-                        shape: const StadiumBorder(),
-                      ),
-                      child: const Text("Delete Profile",
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
+                 
                   const SizedBox(height: 30),
                 ],
               ),

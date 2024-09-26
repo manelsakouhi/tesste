@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:teste/Admin/utils/app_color.dart';
+import 'package:teste/core/shared/ProfilClass.dart';
 
 import '../../Admin/controller/data_controller.dart';
-import '../../Admin/utils/app_color.dart';
-import '../../core/shared/ProfilClass.dart';
 import '../../core/constant/approutes.dart';
 import '../../core/services/services.dart';
 
@@ -18,7 +17,7 @@ class ProfilPagepro extends StatefulWidget {
 }
 
 class _ProfilPageproState extends State<ProfilPagepro> {
- final currentUser = FirebaseAuth.instance.currentUser!;
+  final currentUser = FirebaseAuth.instance.currentUser!;
   bool isNotEditable = true;
 
   @override
@@ -28,8 +27,8 @@ class _ProfilPageproState extends State<ProfilPagepro> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile Page", textAlign: TextAlign.center),
-        actions: [
+        title:  Text("46".tr, textAlign: TextAlign.center),
+        /* actions: [
           IconButton(
             onPressed: () async{
                await FirebaseAuth.instance.signOut();
@@ -40,7 +39,7 @@ class _ProfilPageproState extends State<ProfilPagepro> {
             },
             icon: const Icon(Icons.logout),
           )
-        ],
+        ], */
       ), 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -99,7 +98,7 @@ class _ProfilPageproState extends State<ProfilPagepro> {
                       right: 0,
                       child: GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoute.updateProfilPro);
+                          Get.toNamed(AppRoute.updateProfil);
                         },
                         child: const CircleAvatar(
                           radius: 20,
@@ -132,22 +131,22 @@ class _ProfilPageproState extends State<ProfilPagepro> {
                     children: [
                       ProfileWidget(
                         onTap: () {
-                          Get.toNamed(AppRoute.updateProfilPro);
+                          Get.toNamed(AppRoute.updateProfil);
                         },
                         icon: Icons.person,
-                        title: 'My Profile',
+                        title: '47'.tr,
                       ),
                       ProfileWidget(
                         onTap: () {
                           Get.toNamed(AppRoute.settingsView);
                         },
                         icon: Icons.settings,
-                        title: 'Settings',
+                        title: '48'.tr,
                       ),
                       ProfileWidget(
                         onTap: () {},
                         icon: Icons.notifications,
-                        title: 'Notifications',
+                        title: '49'.tr,
                       ),
                       ProfileWidget(
                         onTap: () async{
@@ -158,7 +157,7 @@ class _ProfilPageproState extends State<ProfilPagepro> {
                           myServices.sharedPreferences.setString("step", "1");
                         },
                         icon: Icons.logout,
-                        title: 'Log Out',
+                        title: '44'.tr,
                       ),
                     ],
                   ),

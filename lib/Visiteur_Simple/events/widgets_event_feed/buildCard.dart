@@ -52,6 +52,7 @@ Widget buildCard({String? image, String? text, Function? func, DocumentSnapshot?
 
   // Define a placeholder image URL for fallback
   String placeholderImage = 'https://www.shutterstock.com/shutterstock/photos/1955339317/display_1500/stock-vector-no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-1955339317.jpg'; // Replace with your actual placeholder image URL
+  
 
   return Container(
     padding: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 10),

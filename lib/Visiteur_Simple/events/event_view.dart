@@ -9,7 +9,6 @@ import 'widgets_event_view/custom_4.dart';
 import 'widgets_event_view/custom_5.dart';
 import 'widgets_event_view/custom_one.dart';
 import 'widgets_event_view/custom_two.dart';
-import 'widgets_event_view/invite_friends.dart';
 
 class EventPageView extends StatelessWidget {
   final String eventId;  // Event ID to listen to Firestore updates
@@ -50,7 +49,7 @@ class EventPageView extends StatelessWidget {
           try {
             List media = eventData.get('media') as List;
             Map mediaItem = media.firstWhere((element) => element['isImage'] == true, orElse: () => {} as Map);
-            eventImage = mediaItem['url'] ?? '';
+            eventImage = mediaItem['url'] ;
           } catch (e) {
             eventImage = '';
           }

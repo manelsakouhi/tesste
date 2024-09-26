@@ -11,6 +11,7 @@ import 'package:teste/core/constant/approutes.dart';
 import 'package:teste/core/services/services.dart';
 
 import '../../Admin/utils/app_color.dart';
+import 'update_email.dart';
 
 class UpdateProfileAdmin extends StatefulWidget {
   const UpdateProfileAdmin({super.key});
@@ -126,7 +127,7 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
     String location = _locationController.text;
-    String email = _emailController.text;
+    // String email = _emailController.text;
 
     String? imageUrl;
 
@@ -140,9 +141,14 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
         final snapshot = await uploadTask.whenComplete(() => {});
         imageUrl = await snapshot.ref.getDownloadURL();
       } else {
-        imageUrl =
-            _imageUrl; // Keep the existing image URL if no new image is selected
+        imageUrl = _imageUrl; // Keep the existing image URL if no new image is selected
       }
+
+      // Update email in FirebaseAuth
+    //   if (currentUser.email != email) {
+    //     await currentUser.updateEmail(email);
+    // //  await   FirebaseAuth.instance.currentUser!.updateEmail(email);
+    //   }
 
       // Update user data in Firestore
       await FirebaseFirestore.instance
@@ -152,7 +158,7 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
         'firstName': firstName,
         'lastName': lastName,
         'location': location,
-        'email': email,
+        // 'email': email,
         if (imageUrl != null) 'image': imageUrl,
       }, SetOptions(merge: true));
 
@@ -174,8 +180,6 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
       });
     }
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -283,16 +287,19 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      label: Text("Email"),
-                      prefixIcon: Icon(Icons.mail),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
-                      ),
-                    ),
-                  ),
+                  // TextFormField(
+                  //   controller: _emailController,
+                  //   decoration: const InputDecoration(
+                  //     label: Text("Email"),
+                  //     prefixIcon: Icon(Icons.mail),
+                  //     focusedBorder: OutlineInputBorder(
+                  //       borderSide: BorderSide(color: Colors.black),
+                  //     ),
+                  //   ),
+                  // ),
+                  // IconButton(onPressed: () {
+                  //   Get.to(UpdateEmailPage());
+                  // }, icon: Icon(Icons.email)),
                   const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
@@ -307,8 +314,7 @@ class _UpdateProfileAdminState extends State<UpdateProfileAdmin> {
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
-                 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

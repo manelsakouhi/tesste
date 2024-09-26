@@ -15,7 +15,9 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
       children: [
         myTextField(
             // bool: false,
-            icon: 'assets/images/photo.png',
+
+            
+            icon: 'assets/images/Icon.png',
             text: 'Event Name',
             controller: controller.titleController,
             validator: (String input) {
@@ -35,9 +37,35 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
      const SizedBox(
                   height: 20,
                 ),
+                iconTitleContainer(
+               
+                    path: 'assets/images/#.png',
+                    text: 'Enter event theme ',
+                    width: double.infinity,
+                    controller:controller. tagsController,
+                    type: TextInputType.text,
+                    onPress: () {},
+                    validator: (String input) {
+                      if (input.isEmpty) {
+                        Get.snackbar('Opps', "Entries is required.",
+                            colorText: Colors.white,
+                            backgroundColor: Colors.blue);
+                        return '';
+                      }
+                      return null;
+                    }),
+
+
+
+
+
+
+                const SizedBox(
+                  height: 20,
+                ),
                 myTextField(
                     // bool: false,
-                    icon: 'assets/images/photo.png',
+                    icon: 'assets/images/location.png',
                     text: 'Location',
                     controller:controller. locationController,
                     validator: (String input) {
@@ -64,7 +92,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
                   children: [
                     iconTitleContainer(
                       isReadOnly: true,
-                      path: 'assets/images/photo.png',
+                      path: 'assets/images/Frame1.png',
                       text: 'Date',
                       controller:controller. dateController,
                       validator: (input) {
@@ -81,7 +109,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
                       },
                     ),
                     iconTitleContainer(
-                        path: 'assets/images/photo.png',
+                        path: 'assets/images/#.png',
                         text: 'Max Entries',
                         controller:controller. maxEntries,
                         type: TextInputType.number,
@@ -101,24 +129,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
                   height: 20,
                 ),
 
-                 iconTitleContainer(
-               
-                    path: 'assets/images/photo.png',
-                    text: 'Enter event theme ',
-                    width: double.infinity,
-                    controller:controller. tagsController,
-                    type: TextInputType.text,
-                    onPress: () {},
-                    validator: (String input) {
-                      if (input.isEmpty) {
-                        Get.snackbar('Opps', "Entries is required.",
-                            colorText: Colors.white,
-                            backgroundColor: Colors.blue);
-                        return '';
-                      }
-                      return null;
-                    }),
-
+                 
               
                  
 
@@ -131,7 +142,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
                   children: [
                     iconTitleContainer(
                      
-                        path: 'assets/images/photo.png',
+                        path: 'assets/images/time.png',
                         text: 'Start Time',
                         controller:controller. startTimeController,
                         isReadOnly: true,
@@ -141,7 +152,7 @@ class CustomTextFormList extends GetView<CreateEventControllerImp> {
                         }),
                     iconTitleContainer(
                     
-                        path: 'assets/images/photo.png',
+                        path: 'assets/images/time.png',
                         text: 'End Time',
                         isReadOnly: true,
                         controller: controller.endTimeController,

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';  //https://pub.dev/packages/nb_utils
 
 class History extends StatefulWidget {
@@ -35,7 +36,7 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: AppBar(
-        title:const Text("Participation History"),
+        title: Text("38".tr),
         centerTitle: true,
 
       ),
@@ -46,14 +47,14 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
           
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-           const Center(
+            Center(
               child: Text(
-                "Participation in Expos",
+                "108".tr,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),),
             const SizedBox(height: 10,),
-         const   Text(style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20, color:Colors.black),
-              "Present since the Great Exhibition of 1851 in London, Tunisia has regularly participated in both World and Specialised Expos. At Specialised Expo 2012 Yeosu, its pavilion was rewarded with the Silver Award in its category for the theme development."),
+            Text(style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20, color:Colors.black),
+              "109".tr),
             const SizedBox(height: 20,),
             Image.asset('assets/images/expo1851.jpg'),
             const SizedBox(height: 10,), 
@@ -69,11 +70,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
   const SizedBox(height: 10,), 
 
             Text(
-              "Expo 2020 Dubai",
+              "110".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 3),
             Text(
-              " Inspiring Youth, Promising Future",
+              "111".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
             Center(
@@ -83,11 +84,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
             ),
             Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Expo 2015 Milan",
+              "112".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 2),
             Text(
-              "Tunisia, Naturally Generous",
+              "113".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
             Center(
@@ -98,11 +99,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
             ),
           const  Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Specialised Expo - Expo 2012 Yeosu",
+              "114".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 2),
             Text(
-              "Enthusiastic City, Connected City",
+              "115".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
             Center(
@@ -113,11 +114,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
             ),
             Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Expo 2010 Shanghai",
+              "116".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 16),
             Text(
-              "Enthusiastic City, Connected City",
+              "117".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
             Image.asset(
@@ -126,11 +127,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
               ).center(),
             Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Expo 2008 Zaragoza",
+              "118".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 16),
             Text(
-              "Managing Water at the Desert’s Edge",
+              "119".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
              Image.asset(
@@ -139,11 +140,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
               ).center(),
                Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Expo 2005 Aichi",
+              "120".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 16),
             Text(
-              "Peace and Sustainable Development",
+              "121".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
              Image.asset(
@@ -152,11 +153,11 @@ class _HistoryState extends State<History> with TickerProviderStateMixin {
               ).center(),
                         Divider(thickness: 3,color: Colors.black).paddingOnly(top: 16, bottom: 16),
             Text(
-              "Expo 2000 Hannover",
+              "122".tr,
               style: boldTextStyle(),
             ).paddingOnly(bottom: 16),
             Text(
-              "The fight against the desert",
+              "123".tr,
               style: secondaryTextStyle(),
             ).paddingOnly(bottom: 16),
              Image.asset(

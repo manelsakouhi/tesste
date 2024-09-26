@@ -81,7 +81,7 @@ class CustomButtonCreateEvent extends GetView<CreateEventControllerImp> {
                    'end_time': controller.endTimeController.text,
                    'max_entries': int.parse(controller.maxEntries.text),
                    'description': controller.descriptionController.text,
-                   'who_can_invite': controller.accessModifier,
+                  // 'who_can_invite': controller.accessModifier,
                    'joined': [FirebaseAuth.instance.currentUser!.uid],
                    'media': controller.mediaUrls,
                    'uid': FirebaseAuth.instance.currentUser!.uid,

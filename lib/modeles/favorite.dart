@@ -51,7 +51,7 @@ class _FavorisState extends State<Favoris> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favorites"),
+        title:  Text("36".tr),
       ),
       body: FutureBuilder<DocumentSnapshot>(
         future: userDocumentFuture,

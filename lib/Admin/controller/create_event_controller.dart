@@ -166,8 +166,7 @@ class CreateEventControllerImp extends CreateEventController {
   String event_Type = 'Public';
   List<String> list_Item = ['Public', 'Private'];
 
-  String accessModifier = 'Closed';
-  List<String> close_list = ['Closed', 'Open'];
+ 
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

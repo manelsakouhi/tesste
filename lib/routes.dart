@@ -6,7 +6,6 @@ import 'package:teste/language/presentation/views/language.dart';
 import 'Admin/Profile/update_profile.dart';
 import 'Admin/widgets_create_events/create_event_view.dart';
 import 'Admin/edit_event/edit_event_view._test.dart';
-import 'Admin/widgets_create_events/edit_event_view.dart';
 import 'Screens/login.dart';
 import 'Visiteur_Simple/Visiteur.dart';
 import 'Visiteur_pro/VisiteurPro.dart';

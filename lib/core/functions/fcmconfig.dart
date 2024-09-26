@@ -1,11 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:get/get.dart';
 import 'package:teste/core/functions/defult_notification.dart';
 
 
 // import 'package:mega_store/controller/orders/orders_pending_controller.dart';
-
+//Cette fonction demande l'autorisation à l'utilisateur pour recevoir des notifications. 
 requestPermissionNotifacation() async {
   NotificationSettings settings =
       await FirebaseMessaging.instance.requestPermission(
@@ -17,9 +16,19 @@ requestPermissionNotifacation() async {
     provisional: false,
     sound: true,
   );
+   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('Permission de notification accordée.');
+  } else {
+    print('Permission de notification refusée.');
+  }
 }
-
+//Cette fonction configure l'écouteur pour les messages entrants de Firebase. 
+//Lorsqu'une notification est reçue pendant que l'application est au premier plan, 
+//l'écouteur FirebaseMessaging.onMessage.listen est déclenché.
 fcmconfig() {
+  FirebaseMessaging.instance.getToken().then((token) {
+    print("FCM Token: $token");
+  });
   FirebaseMessaging.onMessage.listen((message) {
     print("=========== Notifacation ============");
     print(message.notification!.title);
@@ -33,8 +42,9 @@ fcmconfig() {
     refreshPageNotifiction(message.data);
   });
 }
-
-refreshPageNotifiction(data) {
+//Cette fonction est appelée pour actualiser ou rediriger l'utilisateur vers
+// une page spécifique en fonction des données envoyées avec la notification.
+void refreshPageNotifiction(Map<String, dynamic> data) {
   print("============== page id");
   print(data['pageid']);
   print("============== page name");
@@ -46,22 +56,19 @@ refreshPageNotifiction(data) {
 
   if (Get.currentRoute == "/homeLayoutView" &&
       data['pagename'] == "refreshorderpending") {
-    // OrdersControllerImp controller = Get.find();
-    // controller.refreshOrders();
+    // Logic for refreshing orders
   }
   if (Get.currentRoute == "/notificationsView" &&
       data['pagenotification'] == "notification") {
-    // NotificationsControllerImp controller = Get.find();
-    // controller.refreshNotification();
+    // Logic for refreshing notifications
   }
   if (Get.currentRoute == "/ordersStatus" &&
       data['pagename'] == "refreshOrdersStatus") {
     if (data['pagedata'] == "4") {
-      // OrdersStatusControllerImp controller = Get.find();
-      // controller.goToRattingScreen();
+      // Logic for order status
     } else {
-      // OrdersStatusControllerImp controller = Get.find();
-      // controller.getOrdersStatus();
+      // Logic to fetch the order status again
     }
   }
 }
+

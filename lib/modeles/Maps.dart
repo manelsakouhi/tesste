@@ -15,7 +15,7 @@ class Maps extends StatelessWidget {
     MapController mapController = Get.put(MapController());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Maps'),
+        title: Text('42'.tr),
       ),
       body: Obx(() {
         return GoogleMap(

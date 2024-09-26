@@ -2,15 +2,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teste/Visiteur_pro/Contrats.dart';
-import 'package:teste/Visiteur_pro/agendaPro.dart';
+import 'package:teste/Visiteur_pro/discussion/listview_users_view.dart';
+
 import 'package:teste/Visiteur_pro/homePro.dart';
-import 'package:teste/Visiteur_pro/messagePro.dart';
-import 'package:teste/Visiteur_pro/notification.dart';
-import 'package:teste/Visiteur_pro/profil/profilpro.dart';
+import 'package:teste/Visiteur_pro/notifications/notification.dart';
+import 'package:teste/Visiteur_pro/profil/profilPro.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
-import 'package:teste/Visiteur_pro/RDV.dart';
+import 'package:teste/Visiteur_pro/RDV/RDV.dart';
 import 'package:teste/modeles/VisitTunisia.dart';
 import 'package:teste/modeles/contacter_admin.dart';
 import 'package:teste/modeles/favorite.dart';
@@ -19,9 +18,10 @@ import 'package:teste/modeles/partenaires.dart';
 
 import '../Screens/login.dart';
 import '../Visiteur_Simple/events/accueil_events.dart';
-import '../Visiteur_Simple/events/event_view.dart';
 import '../core/constant/approutes.dart';
 import '../core/services/services.dart';
+import 'RDV/liste_RDV.dart';
+import 'contrart/contrat.dart';
 
 class VisiteurPro extends StatefulWidget {
   const VisiteurPro({super.key});
@@ -61,7 +61,7 @@ setCurrentIndex(int index)
 
               ListTile(
                 leading:const Icon(Icons.person),
-              title: const Text("Profils"),
+              title:  Text("32".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -71,17 +71,17 @@ setCurrentIndex(int index)
             ) ,
               ListTile(
                 leading:const Icon(Icons.message),
-              title: const Text("Message"),
+              title:  Text("33".tr),
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MessagePro()),
+            MaterialPageRoute(builder: (context) =>  AdminUsersPage()),
   );
             },
             ) ,
               ListTile(
               leading:const Icon(Icons.home),
-              title: const Text("Home"),
+              title:  Text("34".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -91,7 +91,7 @@ setCurrentIndex(int index)
             ) ,
             ListTile(
             leading:const Icon(Icons.event),
-              title: const Text("Events"),
+              title:  Text("35".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -101,7 +101,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
               leading:const Icon(Icons.calendar_month),
-              title: const Text("My RDV"),
+              title:  Text("136".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -109,19 +109,31 @@ setCurrentIndex(int index)
   );
             },
             ) ,
-             ListTile(
+ListTile(
               leading:const Icon(Icons.calendar_month),
-              title: const Text("Partenariat"),
+              title:  Text("137".tr),
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Contrat()),
+            MaterialPageRoute(builder: (context) => ListeRDV()),
+  );
+            },
+            ) ,
+
+
+             ListTile(
+              leading:const Icon(Icons.calendar_month),
+              title:  Text("138".tr),
+              onTap: () {
+             Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  Contrat()),
   );
             },
             ) ,
              ListTile(
             leading:const Icon(Icons.favorite),
-              title: const Text("Favoris"),
+              title:  Text("36".tr),
               
               onTap: () {
              Navigator.push(
@@ -132,17 +144,17 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
               leading:const Icon(Icons.flag),
-              title: const Text("Visit Tunisia"),
+              title:  Text("45".tr),
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const VisitTunis()),
+            MaterialPageRoute(builder: (context) =>  VisitTunis()),
   );
             },
             ) ,
              ListTile(
               leading:const Icon(Icons.event_seat),
-              title: const Text("About Expo"),
+              title:  Text("39".tr),
              onTap: () {
              Navigator.push(
             context,
@@ -152,7 +164,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
             leading:const Icon(Icons.person),
-              title: const Text("Partners"),
+              title:  Text("40".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -162,7 +174,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
               leading:const Icon(Icons.photo_album),
-              title: const Text("Gallery"),
+              title:  Text("41".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -170,19 +182,10 @@ setCurrentIndex(int index)
   );
             },
             ) ,
-             ListTile(
-            leading:const Icon(Icons.calendar_month),
-              title: const Text("Agenda"),
-              onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AgendaPro()),
-  );
-            },
-            ) ,
+           
              ListTile(
             leading:const Icon(Icons.location_pin),
-              title: const Text("Maps"),
+              title:  Text("42".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -192,7 +195,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
             leading:const Icon(Icons.contact_mail),
-              title: const Text("Contact"),
+              title:  Text("43".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -202,7 +205,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
             leading:const Icon(Icons.logout, color: Colors.red,),
-              title: const Text("Log Out",style:TextStyle(color: Colors.red)),
+              title:  Text("44".tr,style:TextStyle(color: Colors.red)),
               onTap: () {
                  Get.offAllNamed(AppRoute.login);
                 MyServices myServices = Get.find();
@@ -257,7 +260,7 @@ setCurrentIndex(int index)
            
           //ajouter les pages de navigator side
           const HomePro(),
-           const MessagePro(),
+            AdminUsersPage(),
             RendezvousForm(),
            const Favoris(),
           const ProfilPagepro(),
@@ -270,12 +273,12 @@ setCurrentIndex(int index)
         selectedFontSize: 20,
         unselectedFontSize: 14,
 
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label:"Message"),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label:"RDV"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_sharp), label:"Favoris"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label:"Profil"),
+        items:  [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label:"34".tr),
+          BottomNavigationBarItem(icon: Icon(Icons.message), label:"33".tr),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label:"136".tr),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_sharp), label:"36".tr),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label:"32".tr),
         ]),
        
         

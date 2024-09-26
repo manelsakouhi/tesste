@@ -54,7 +54,8 @@ class _JoinState extends State<Join> {
       }
 
       // Get the event data from the snapshot
-      Map<String, dynamic> eventData = eventSnapshot.data() as Map<String, dynamic>;
+      Map<String, dynamic> eventData =
+          eventSnapshot.data() as Map<String, dynamic>;
       List<String> joined = List<String>.from(eventData['joined'] ?? []);
       int maxEntries = eventData['max_entries'] ?? 0;
       String dateStr = eventData['date'] ?? ''; // The date field from Firestore
@@ -62,7 +63,8 @@ class _JoinState extends State<Join> {
       // Check if the event date has passed
       DateTime eventDate;
       try {
-        eventDate = DateFormat('dd-MM-yyyy').parse(dateStr); // Parse date from Firestore
+        eventDate = DateFormat('dd-MM-yyyy')
+            .parse(dateStr); // Parse date from Firestore
         // Set a time to compare, e.g., start of the day
         eventDate = DateTime(eventDate.year, eventDate.month, eventDate.day);
       } catch (e) {
@@ -72,7 +74,8 @@ class _JoinState extends State<Join> {
       DateTime now = DateTime.now();
       if (now.isAfter(eventDate) && _isJoined) {
         // Can't join or unjoin after the event has started
-        throw Exception('The event has already started. You cannot change your status.');
+        throw Exception(
+            'The event has already started. You cannot change your status.');
       }
 
       if (_isJoined) {
@@ -82,11 +85,11 @@ class _JoinState extends State<Join> {
         setState(() {
           _isJoined = false;
         });
-        _showDialog('Success', 'You have successfully unjoined the event.');
+        _showDialog('71'.tr, '72'.tr);
       } else {
         // Join
         if (joined.length >= maxEntries) {
-          throw Exception('The event has reached its maximum number of entries.');
+          throw Exception('74'.tr);
         }
         if (joined.contains(userId)) {
           throw Exception('You have already joined this event.');
@@ -96,9 +99,8 @@ class _JoinState extends State<Join> {
         setState(() {
           _isJoined = true;
         });
-        _showDialog('Success', 'You have successfully joined the event.');
+        _showDialog('71'.tr, '73'.tr);
       }
-
     } catch (e) {
       _showDialog('Error', 'An error occurred: ${e.toString()}');
     } finally {
@@ -117,7 +119,7 @@ class _JoinState extends State<Join> {
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: Text('70'.tr),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
@@ -152,7 +154,7 @@ class _JoinState extends State<Join> {
             child: _isLoading
                 ? CircularProgressIndicator()
                 : Text(
-                    _isJoined ? 'Unjoin' : 'Join',
+                    _isJoined ? '59'.tr : '58'.tr,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

@@ -31,7 +31,7 @@ class _EventsViewState extends State<EventsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Events"),
+        title:  Text("35".tr),
 
       ),
       //backgroundColor: Colors.black.withOpacity(0.03),
@@ -44,8 +44,8 @@ class _EventsViewState extends State<EventsView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "What's Going on Today",
+                 Text(
+                  "56".tr,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 SizedBox(height: Get.height * 0.02),
@@ -55,7 +55,7 @@ class _EventsViewState extends State<EventsView> {
                   child: TextField(
                     controller: searchController,
                     decoration: InputDecoration(
-                      hintText: 'Search events...',
+                      hintText: '57'.tr,
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),

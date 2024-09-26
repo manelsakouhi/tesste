@@ -29,18 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile Page", textAlign: TextAlign.center),
-        actions: [
-          IconButton(
-            onPressed: () async{
-               await FirebaseAuth.instance.signOut();
-             Get.offAllNamed(AppRoute.login);
-                          MyServices myServices = Get.find();
-                          myServices.sharedPreferences.clear();
-                          myServices.sharedPreferences.setString("step", "1");
-            },
-            icon: const Icon(Icons.logout),
-          )
-        ],
+        
       ), 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

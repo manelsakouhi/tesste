@@ -65,63 +65,11 @@ class DescriptionAndInviteSection extends GetView<CreateEventControllerImp> {
         SizedBox(
           height: size.height * 0.02,
         ),
-        Container(
-          alignment: Alignment.topLeft,
-          child: myText(
-            text: 'Who can invite?',
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
+       
         SizedBox(
           height: size.height * 0.005,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              width: 150,
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(width: 1, color: AppColors.genderTextColor),
-              ),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                underline: Container(),
-                icon: Image.asset('assets/images/photo.png'),
-                elevation: 16,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.black,
-                ),
-                value: controller.accessModifier,
-                onChanged: (String? newValue) {
-                  controller.accessModifier = newValue!;
-                  controller.update(); // Update the UI
-                },
-                items: controller.close_list
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xffA6A6A6),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
-        ),
+ 
       ],
     );
   }

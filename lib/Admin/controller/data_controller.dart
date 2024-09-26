@@ -153,7 +153,7 @@ class DataController extends GetxController {
   }
 
   // Send message to Firebase (existing method)
-  var isMessageSending = false.obs;
+  var isMessageSending = true.obs;
   sendMessageToFirebase({
     Map<String, dynamic>? data,
     String? lastMessage,

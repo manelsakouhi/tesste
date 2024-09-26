@@ -1,25 +1,26 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:teste/Visiteur_Simple/discussion/listview_users_view.dart';
 import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
-import 'package:teste/modeles/VisitTunisia.dart';
-import 'package:teste/Visiteur_Simple/agenda.dart';
 import 'package:teste/modeles/contacter_admin.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
-import 'package:teste/Visiteur_Simple/discussion/messageVisiteurSimple.dart';
 import 'package:teste/Visiteur_Simple/notification/notification.dart';
 import 'package:teste/Visiteur_Simple/profil/profil.dart';
-import 'package:teste/Visiteur_Simple/profil/update_profil.dart';
+import '../Admin/controller/data_controller.dart';
 import '../core/constant/approutes.dart';
 import '../core/services/services.dart';
 import 'Home.dart';
 import '../Screens/login.dart';
+import 'agenda.dart';
 import 'events/accueil_events.dart';
+
 
 class Visiteur extends StatefulWidget {
   const Visiteur({super.key});
@@ -36,6 +37,21 @@ setCurrentIndex(int index)
     _currentIndex = index;
   });
 }
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Get.put(DataController(),permanent: true);
+        FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((message) {
+      
+     // LocalNotificationService.display(message);
+    });
+
+  //LocalNotificationService.storeToken();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +61,8 @@ setCurrentIndex(int index)
           padding: EdgeInsets.zero,
           children: [
            const UserAccountsDrawerHeader(
-              accountName:  Text('Manel Sakouhi'), 
-              accountEmail:  Text('manelsakouhi@gmail.com'),
+              accountName:  Text(''), 
+              accountEmail:  Text(''),
               currentAccountPicture: CircleAvatar(
               ),
                decoration: BoxDecoration(
@@ -55,8 +71,8 @@ setCurrentIndex(int index)
               ),
 
               ListTile(
-                leading:const Icon(Icons.person),
-              title: const Text("Profils"),
+                leading: Icon(Icons.person),
+              title:  Text("32".tr),
               onTap: () {
              Navigator.push(
             context,
@@ -66,18 +82,18 @@ setCurrentIndex(int index)
             ) ,
               ListTile(
                 leading:const Icon(Icons.message),
-              title: const Text("Message"),
+              title:  Text('33'.tr),
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ChatPage(receiverUserEmail: 'email', receiverUserID: 'uid',)
+            MaterialPageRoute(builder: (context) =>AdminUsersPage()
             ),
            );
             },
             ) ,
               ListTile(
               leading:const Icon(Icons.home),
-              title: const Text("Home"),
+              title:  Text('34'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -87,7 +103,7 @@ setCurrentIndex(int index)
             ) ,
             ListTile(
             leading:const Icon(Icons.event),
-              title: const Text("Events"),
+              title: Text('35'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -98,7 +114,7 @@ setCurrentIndex(int index)
 
              ListTile(
             leading:const Icon(Icons.favorite),
-              title: const Text("Favoris"),
+              title: Text('36'.tr),
               
               onTap: () {
              Navigator.push(
@@ -107,19 +123,25 @@ setCurrentIndex(int index)
   );
             },
             ) ,
+             
              ListTile(
-              leading:const Icon(Icons.flag),
-              title: const Text("Visit Tunisia"),
+              leading:const Icon(Icons.calendar_month),
+              title: Text('37'.tr),
               onTap: () {
              Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const VisitTunis()),
+            MaterialPageRoute(builder: (context) =>  AgendaPage()),
   );
             },
             ) ,
+
+    
+
+
+
              ListTile(
-              leading:const Icon(Icons.flag),
-              title: const Text("Participation History"),
+              leading:const Icon(Icons.history_edu_outlined),
+              title: Text('38'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -129,7 +151,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
               leading:const Icon(Icons.event_seat),
-              title: const Text("About Expo"),
+              title: Text('39'.tr),
              onTap: () {
              Navigator.push(
             context,
@@ -139,7 +161,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
             leading:const Icon(Icons.person),
-              title: const Text("Partners"),
+              title: Text('40'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -149,7 +171,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
               leading:const Icon(Icons.photo_album),
-              title: const Text("Gallery"),
+              title: Text('41'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -157,19 +179,10 @@ setCurrentIndex(int index)
   );
             },
             ) ,
-             ListTile(
-            leading:const Icon(Icons.calendar_month),
-              title: const Text("Agenda"),
-              onTap: () {
-             Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Agenda()),
-  );
-            },
-            ) ,
+             
              ListTile(
             leading:const Icon(Icons.location_pin),
-              title: const Text("Maps"),
+              title: Text('42'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -179,7 +192,7 @@ setCurrentIndex(int index)
             ) ,
              ListTile(
             leading:const Icon(Icons.contact_mail),
-              title: const Text("Contact"),
+              title: Text('43'.tr),
               onTap: () {
              Navigator.push(
             context,
@@ -187,9 +200,17 @@ setCurrentIndex(int index)
   );
             },
             ) ,
+
+
+
+
+
+
+
+
              ListTile(
             leading:const Icon(Icons.logout, color: Colors.red,),
-              title: const Text("Log Out",style:TextStyle(color: Colors.red)),
+              title:  Text('44'.tr,style:TextStyle(color: Colors.red)),
               onTap: () {
              Get.offAllNamed(AppRoute.login);
                 MyServices myServices = Get.find();
@@ -206,7 +227,6 @@ setCurrentIndex(int index)
 
 
 
-// دا كود انهى صفحه بالظبط** aya code 
 
       appBar: AppBar(
         //title: const Text("Visiteur: Expo Japon Osaka 2025"),
@@ -216,7 +236,7 @@ setCurrentIndex(int index)
             onPressed: () {
               Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>  UpdateProfil()),
+        MaterialPageRoute(builder: (context) => const ProfilPage()),
   );
             },
           
@@ -245,10 +265,11 @@ setCurrentIndex(int index)
            
           //ajouter les pages de navigator side
            Home(),
-           const ChatPage(receiverUserEmail:'email', receiverUserID: 'uid',),
-          
+          //  const ChatPage(receiverUserEmail:'email', receiverUserID: 'uid',),
+          AdminUsersPage(),
            const Favoris(),
            const ProfilPage(),
+           
           ][_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setCurrentIndex(index),
@@ -258,11 +279,12 @@ setCurrentIndex(int index)
         selectedFontSize: 20,
         unselectedFontSize: 14,
 
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label:"Message"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_sharp), label:"Favoris"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label:"Profil"),
+        items:  [
+          BottomNavigationBarItem(icon:const Icon(Icons.home), label:'34'.tr),
+          BottomNavigationBarItem(icon:const Icon(Icons.message), label:"33".tr),
+          BottomNavigationBarItem(icon:const Icon(Icons.favorite_sharp), label:"36".tr),
+          BottomNavigationBarItem(icon:const Icon(Icons.person), label:"32".tr),
+         
         ]),
        
         

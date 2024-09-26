@@ -6,7 +6,7 @@ import 'package:teste/Visiteur_Simple/events/widgets_event_view/join.dart';
 
 import '../../../Admin/utils/app_color.dart';
 import '../../../Admin/widgets_create_events/my_widgets.dart';
-import 'CustomButtonJoin.dart';
+
 
 
 
@@ -276,7 +276,7 @@ String eventImage = '';
             const  SizedBox(
                 height: 60,
               ),
-              const CustomButtonJoin(),
+             
              
             ],
           ),
