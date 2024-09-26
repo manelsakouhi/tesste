@@ -41,26 +41,64 @@ class _ChatPageState extends State<ChatPage> {
         .snapshots();
   }
 
-  void _sendMessage(String messageText) async {
-    if (messageText.isNotEmpty) {
-      final String senderId = _auth.currentUser!.uid;
-      final String senderEmail = _auth.currentUser!.email!;
+Future<Map<String, String>> _getSenderName(String userId) async {
+  // Fetch the sender's document from the 'users' collection (or wherever your user data is stored)
+  DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userId)
+      .get();
 
-      await FirebaseFirestore.instance
-          .collection('chat rooms')
-          .doc(widget.chatRoomId)
-          .collection('messages')
-          .add({
-        'message': messageText,
-        'senderId': senderId,
-        'senderEmail': senderEmail,
-        'receiverId': widget.adminUserId,
-        'timestamp': Timestamp.now(),
-      });
+  // Extract the firstName and lastName from the user document
+  String firstName = userSnapshot['firstName'];
+  String lastName = userSnapshot['lastName'];
 
-      _messageController.clear();
-    }
+  return {'firstName': firstName, 'lastName': lastName};
+}
+
+
+ void _sendMessage(String messageText) async {
+  if (messageText.isNotEmpty) {
+    final String senderId = _auth.currentUser!.uid;
+    final String senderEmail = _auth.currentUser!.email!;
+    final String receiverId = widget.adminUserId; // ID of the user who will receive the message
+
+// Get sender's first and last name
+    Map<String, String> senderName = await _getSenderName(senderId);
+    String senderFirstName = senderName['firstName']!;
+    String senderLastName = senderName['lastName']!;
+
+    // Send the message to Firestore
+    await FirebaseFirestore.instance
+        .collection('chat rooms')
+        .doc(widget.chatRoomId)
+        .collection('messages')
+        .add({
+      'message': messageText,
+      'senderId': senderId,
+      'senderEmail': senderEmail,
+      'receiverId': receiverId,
+      'timestamp': Timestamp.now(),
+    });
+
+    // Add a notification for the receiver
+    await FirebaseFirestore.instance
+        .collection('notifications')
+        .doc(receiverId) // Document for the user receiving the notification
+        .collection('myNotifications')
+        .add({
+      'message': messageText,
+      'senderId': senderId,
+      'senderEmail': senderEmail,
+      'senderName': '$senderFirstName $senderLastName',
+      'timestamp': Timestamp.now(),
+      'chatRoomId': widget.chatRoomId, // Optionally, you can store the chatRoomId for reference
+    });
+
+    // Clear the message input field
+    _messageController.clear();
   }
+}
+
 
   void _sendClaimMessage(String claimType) {
     _sendMessage(claimType);
@@ -70,7 +108,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat with ${widget.adminUserName}'),
+        title: Text('${widget.adminUserName}'),
       ),
       body: Column(
         children: [

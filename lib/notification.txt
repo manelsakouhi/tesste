@@ -1,4 +1,0 @@
-notification
-
-home admin
-drawer nom et image

@@ -10,8 +10,8 @@ import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/partenaires.dart';
 
-import '../Visiteur_Simple/agenda.dart';
 import '../Visiteur_Simple/events/accueil_events.dart';
+import '../modeles/agenda.dart';
 
 class HomePro extends StatefulWidget {
   const HomePro({super.key});

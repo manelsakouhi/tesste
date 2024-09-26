@@ -1,9 +1,12 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teste/Visiteur_Simple/discussion/listview_users_view.dart';
+import 'package:teste/modeles/agenda.dart';
 import 'package:teste/modeles/histoire.dart';
 import 'package:teste/modeles/AboutExpo.dart';
 import 'package:teste/modeles/Maps.dart';
@@ -11,14 +14,13 @@ import 'package:teste/modeles/contacter_admin.dart';
 import 'package:teste/modeles/favorite.dart';
 import 'package:teste/modeles/galerie.dart';
 import 'package:teste/modeles/partenaires.dart';
-import 'package:teste/Visiteur_Simple/notification/notification.dart';
+import 'package:teste/notification/notification.dart';
 import 'package:teste/Visiteur_Simple/profil/profil.dart';
 import '../Admin/controller/data_controller.dart';
 import '../core/constant/approutes.dart';
 import '../core/services/services.dart';
 import 'Home.dart';
 import '../Screens/login.dart';
-import 'agenda.dart';
 import 'events/accueil_events.dart';
 
 
@@ -30,6 +32,7 @@ class Visiteur extends StatefulWidget {
 }
 
 class _VisiteurState extends State<Visiteur> {
+  final currentUser=FirebaseAuth.instance.currentUser!;
   int _currentIndex=0;
 setCurrentIndex(int index)
 {
@@ -60,15 +63,52 @@ setCurrentIndex(int index)
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-           const UserAccountsDrawerHeader(
-              accountName:  Text(''), 
-              accountEmail:  Text(''),
-              currentAccountPicture: CircleAvatar(
-              ),
-               decoration: BoxDecoration(
-                color: Colors.blueAccent,
-              ),
-              ),
+            StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(currentUser.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const UserAccountsDrawerHeader(
+                    accountName: Text('Loading...'),
+                    accountEmail: Text('Loading...'),
+                    currentAccountPicture: CircleAvatar(),
+                    decoration: BoxDecoration(color: Colors.blueAccent),
+                  );
+                }
+                if (snapshot.hasError || !snapshot.hasData) {
+                  return const UserAccountsDrawerHeader(
+                    accountName: Text('Error'),
+                    accountEmail: Text('Error loading data'),
+                    currentAccountPicture: CircleAvatar(),
+                    decoration: BoxDecoration(color: Colors.redAccent),
+                  );
+                }
+
+                final userData = snapshot.data!;
+                final firstName = userData['firstName'] ?? 'Unknown';
+                final lastName = userData['lastName'] ?? '';
+                final email = userData['email'] ?? 'No email';
+                final imageUrl = userData['image'] ?? '';
+
+                return UserAccountsDrawerHeader(
+                  accountName: Text('$firstName $lastName'),
+                  accountEmail: Text(email),
+                  currentAccountPicture: imageUrl.isEmpty
+                      ? CircleAvatar(
+                          child: Text(
+                            firstName[0].toUpperCase(),
+                            style: TextStyle(fontSize: 40.0),
+                          ),
+                        )
+                      : CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(imageUrl),
+                        ),
+                  decoration: BoxDecoration(color: Colors.blueAccent),
+                );
+              },
+            ),
 
               ListTile(
                 leading: Icon(Icons.person),

@@ -1,22 +1,20 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:teste/main.dart';
 
-
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> defultNotification({
   required String title,
   required String body,
 }) async {
-  const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-    'your_channel_id', 'your_channel_name',
+  const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    'your_channel_id',
+    'your_channel_name',
     channelDescription: 'your_channel_description',
     importance: Importance.max,
     priority: Priority.high,
   );
 
-  const NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
+  const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 
   await flutterLocalNotificationsPlugin.show(
     0, // ID de notification
@@ -25,4 +23,3 @@ Future<void> defultNotification({
     platformChannelSpecifics,
   );
 }
-

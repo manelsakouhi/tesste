@@ -1,5 +1,7 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ import 'package:teste/modeles/partenaires.dart';
 
 import '../Screens/login.dart';
 
+import '../notification/notification.dart';
 import 'Contart/ContratList.dart';
 import 'Contart/ContratDetails.dart';
 import 'RDV/users_list_view.dart';
@@ -47,15 +50,52 @@ setCurrentIndex(int index)
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-           const UserAccountsDrawerHeader(
-              accountName:  Text('Manel Sakouhi'), 
-              accountEmail:  Text('manelsakouhi@gmail.com'),
-              currentAccountPicture: CircleAvatar(
-              ),
-               decoration: BoxDecoration(
-                color: Colors.blueAccent,
-              ),
-              ),
+           StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(currentUser.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const UserAccountsDrawerHeader(
+                    accountName: Text('Loading...'),
+                    accountEmail: Text('Loading...'),
+                    currentAccountPicture: CircleAvatar(),
+                    decoration: BoxDecoration(color: Colors.blueAccent),
+                  );
+                }
+                if (snapshot.hasError || !snapshot.hasData) {
+                  return const UserAccountsDrawerHeader(
+                    accountName: Text('Error'),
+                    accountEmail: Text('Error loading data'),
+                    currentAccountPicture: CircleAvatar(),
+                    decoration: BoxDecoration(color: Colors.redAccent),
+                  );
+                }
+
+                final userData = snapshot.data!;
+                final firstName = userData['firstName'] ?? 'Unknown';
+                final lastName = userData['lastName'] ?? '';
+                final email = userData['email'] ?? 'No email';
+                final imageUrl = userData['image'] ?? '';
+
+                return UserAccountsDrawerHeader(
+                  accountName: Text('$firstName $lastName'),
+                  accountEmail: Text(email),
+                  currentAccountPicture: imageUrl.isEmpty
+                      ? CircleAvatar(
+                          child: Text(
+                            firstName[0].toUpperCase(),
+                            style: TextStyle(fontSize: 40.0),
+                          ),
+                        )
+                      : CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(imageUrl),
+                        ),
+                  decoration: BoxDecoration(color: Colors.blueAccent),
+                );
+              },
+            ),
 
               ListTile(
                 leading:const Icon(Icons.person),
@@ -68,7 +108,7 @@ setCurrentIndex(int index)
             },
             ) ,
 
-              ListTile(
+             /*  ListTile(
               leading:const Icon(Icons.home),
               title: const Text("Home"),
               onTap: () {
@@ -77,7 +117,7 @@ setCurrentIndex(int index)
             MaterialPageRoute(builder: (context) => const HomeAdmin()),
   );
             },
-            ) ,
+            ) , */
             ListTile(
             leading:const Icon(Icons.event),
               title: const Text("Events"),
@@ -186,7 +226,7 @@ setCurrentIndex(int index)
             onPressed: () {
               Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Notif()),
+        MaterialPageRoute(builder: (context) => const NotificationPage()),
   );
             },
           
@@ -201,7 +241,7 @@ setCurrentIndex(int index)
         body: [
                       
           //ajouter les pages 
-          const HomeAdmin(),
+         // const HomeAdmin(),
             RendezvousList(),
             AllUsersPage(),
            const EventsListView(),
@@ -217,7 +257,7 @@ setCurrentIndex(int index)
         unselectedFontSize: 14,
 
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
+         // BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label:"RDV"),
            BottomNavigationBarItem(icon: Icon(Icons.message), label:"chat"),
           BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label:"Events"),
